@@ -1,5 +1,5 @@
 {
-    "name": "php-cephclient",
+    "name": "octivi/php-cephclient",
     "type": "library",
     "description": "PHP module to communicate with Ceph's REST API",
     "keywords": ["php-cephclient", "cephclient", "client", "ceph"],
