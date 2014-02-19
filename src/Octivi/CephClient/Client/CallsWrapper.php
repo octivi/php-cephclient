@@ -1,9 +1,8 @@
 <?php
 
-namespace Client;
+namespace Octivi\CephClient\Client;
 
-use Client\CephClient;
-use Exception\CephResponseException;
+use Octivi\CephClient\Client\CephClient;
 
 class CallsWrapper {
 

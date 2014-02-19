@@ -1,8 +1,8 @@
 <?php
 
-namespace Client;
+namespace Octivi\CephClient\Client;
 
-use Exception\CephResponseException;
+use Octivi\CephClient\Exception\CephResponseException;
 
 class CephClient {
 

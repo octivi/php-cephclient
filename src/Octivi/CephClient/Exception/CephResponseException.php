@@ -1,6 +1,6 @@
 <?php
 
-namespace Exception;
+namespace Octivi\CephClient\Exception;
 use Exception;
 
 class CephResponseException extends Exception {

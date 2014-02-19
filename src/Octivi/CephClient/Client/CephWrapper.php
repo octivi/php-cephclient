@@ -1,16 +1,16 @@
 <?php
 
-namespace Client;
+namespace Octivi\CephClient\Client;
 
-use Client\CephClient;
-use Client\Calls\AuthCalls;
-use Client\Calls\ConfigKeyCalls;
-use Client\Calls\MdsCalls;
-use Client\Calls\MonCalls;
-use Client\Calls\OsdCalls;
-use Client\Calls\PgCalls;
-use Client\Calls\RootCalls;
-use Client\Calls\TellCalls;
+use Octivi\CephClient\Client\CephClient;
+use Octivi\CephClient\Client\Calls\AuthCalls;
+use Octivi\CephClient\Client\Calls\ConfigKeyCalls;
+use Octivi\CephClient\Client\Calls\MdsCalls;
+use Octivi\CephClient\Client\Calls\MonCalls;
+use Octivi\CephClient\Client\Calls\OsdCalls;
+use Octivi\CephClient\Client\Calls\PgCalls;
+use Octivi\CephClient\Client\Calls\RootCalls;
+use Octivi\CephClient\Client\Calls\TellCalls;
 
 class CephWrapper {
 

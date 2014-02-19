@@ -1,8 +1,8 @@
 <?php
 
-namespace Client\Calls;
+namespace Octivi\CephClient\Client\Calls;
 
-use Client\CallsWrapper;
+use Octivi\CephClient\Client\CallsWrapper;
 
 class OsdCalls extends CallsWrapper {
 
