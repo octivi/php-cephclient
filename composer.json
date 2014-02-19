@@ -1,0 +1,17 @@
+{
+    "name": "php-cephclient",
+    "type": "library",
+    "description": "PHP module to communicate with Ceph's REST API ",
+    "keywords": ["php-cephclient", "cephclient", "client", "ceph"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rafał Lorenz",
+            "email": "vardius@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Octivi": "src/" }
+    },
+    "minimum-stability": "dev"
+}
