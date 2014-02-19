@@ -1,9 +1,7 @@
 Octivi - CephClient
 ======================================
 
-php-cephclient is a PHP module to communicate with `Ceph's REST API`_ (``ceph-rest-api``).
-
-.. _Ceph's REST API: http://ceph.com/docs/master/man/8/ceph-rest-api/
+php-cephclient is a PHP module to communicate with [Ceph's REST API](http://ceph.com/docs/master/man/8/ceph-rest-api/).
 
 This is currently a work in progress.
 
@@ -31,9 +29,7 @@ Contributors:
 Want to contribute ? Feel free to send pull requests !
 
 Have problems, bugs, feature ideas ?
-We are using the github `issue tracker`_ to manage them.
-
-.. _issue tracker: https://github.com/imagin/php-cephclient/issues
+We are using the github [issue tracker](https://github.com/imagin/php-cephclient/issues) to manage them.
 
 HOW TO USE
 ==================================================
@@ -41,6 +37,7 @@ HOW TO USE
 Installation
 ----------------
 Install the package through composer::
+
     {
         "repositories":[
                 {
@@ -57,12 +54,14 @@ Install the package through composer::
 Usage
 ----------------
 Instanciate CephWrapper::
+
     use Octivi\CephClient\Client\CephWrapper;
 
     $url = 'http://10.20.51.201:5000/api/v0.1/';
     $cephClient = new CephWrapper($url);
 
 Optional with authentication:
+
     use Octivi\CephClient\Client\CephWrapper;
 
     $url = 'http://10.20.51.201:5000/api/v0.1/';
@@ -70,9 +69,11 @@ Optional with authentication:
     $cephClient = new CephWrapper($url);
 
 Do your request.
+
     $response = $cephClient->root->fsId();
 
 Response example:
+
     {
         "status": "OK",
         "output": {
@@ -83,10 +84,12 @@ Response example:
 
 Optional possibility:
 After geting your response you can draw info about the call:
+
     $cephClient->root->fsId();
     $cephClient->getInfo();
 
 Info example:
+
     array (size=26)
         'url' => string 'http://10.20.51.201:5000/api/v0.1/fsid' (length=38)
         'content_type' => string 'application/json' (length=16)
