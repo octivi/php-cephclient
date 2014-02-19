@@ -3,6 +3,7 @@
 namespace Octivi\CephClient\Client\Calls;
 
 use Octivi\CephClient\Client\CallsWrapper;
+use Octivi\CephClient\Exception\FunctionNotImplementedException;
 
 class MdsCalls extends CallsWrapper {
 

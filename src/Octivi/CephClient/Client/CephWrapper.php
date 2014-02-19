@@ -38,16 +38,18 @@ class CephWrapper {
         $this->tell = new TellCalls($this->client);
     }
 
-    public function useAuth(boolean $use) {
-        $this->client->useAuth($use);
+    public function useAuth($name, $pass) {
+        if (isset($name) && isset($pass)) {
+            $this->client->useAuth(true);
+            $this->client->setName($name);
+            $this->client->setPass($pass);
+        } else {
+            $this->client->useAuth(false);
+        }
     }
 
-    public function setName($name) {
-        $this->client->setName($name);
-    }
-
-    public function setPass($pass) {
-        $this->client->setPass($pass);
+    public function getInfo() {
+        return $this->client->getInfo();
     }
 
 }

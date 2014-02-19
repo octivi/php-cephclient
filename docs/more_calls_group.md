@@ -1,0 +1,94 @@
+    * Auth Calls
+        ** export
+        ** get
+        ** getKey
+        ** showList
+        ** printKey
+        ** add
+        ** caps
+        ** del
+        ** getOrCreate
+        ** getOrCreate_key
+        ** -import-
+        ** getFormatted
+    * Config Key Calls
+        ** exists
+        ** get
+        ** showList
+    * MDS Calls
+        ** showCompat
+        ** dump
+        ** getMap
+        ** stat
+        ** addDataPool
+        ** downCluster
+        ** upCluster
+        ** compatCompatRm
+        ** incompatCompatRm
+        ** deactivate
+        ** fail
+        ** newFs
+        ** removeDataPool
+        ** rm
+        ** rmFailed
+        ** -setAllowNewSnaps-
+        ** setMaxMds
+        ** setMap
+        ** stop
+        ** tell
+        ** -unsetAllowNewSnaps-
+    * MON Calls
+        ** dump
+        ** getMap
+        ** stat
+        ** status
+        ** add
+        ** remove
+    * OSD Calls
+        ** blacklistLs
+        ** crushDump
+        ** crushRuleDump
+        ** crushRuleList
+        ** crushRuleLs
+        ** dump
+        ** find
+        ** getCrushMap
+        ** getMap
+        ** getMaxOsd
+        ** ls
+        ** lsPools
+        ** map
+        ** perf
+        ** getPool
+        ** poolStats
+        ** stat
+        ** tree
+    * PG Calls
+        ** debug
+        ** dump
+        ** dumpJson
+        ** dumpPoolsJson
+        ** dumpStuck
+        ** getMap
+        ** map
+        ** stat
+    * Root Calls
+        ** df
+        ** fsId
+        ** health
+        ** quorumStatus
+        ** report
+        ** status
+        ** compact
+        ** heap
+        ** injectArgs
+        ** log
+        ** quorum
+        ** scrub
+        ** tell
+    * Tell Calls
+        ** debugDumpMissing
+        ** dumpPgRecoveryStats
+        ** listMissing
+        ** query
+        ** version

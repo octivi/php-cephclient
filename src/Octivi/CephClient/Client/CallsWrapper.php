@@ -28,8 +28,4 @@ class CallsWrapper {
         return $this->client->createCurl($url, "DELETE", $body);
     }
 
-    public function getInfo() {
-        return $this->client->getInfo();
-    }
-
 }
