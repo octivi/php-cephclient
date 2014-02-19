@@ -24,12 +24,13 @@ Nothing prevents you from calling the client directly.
 Development, Feedback, Bugs
 --------------------------------------------------
 Contributors:
+
 * [Rafał Lorenz](https://github.com/vardius)
 
 Want to contribute ? Feel free to send pull requests !
 
 Have problems, bugs, feature ideas ?
-We are using the github [issue tracker](https://github.com/imagin/php-cephclient/issues) to manage them.
+We are using the github [issue tracker](https://github.com/octivi/php-cephclient/issues) to manage them.
 
 HOW TO USE
 ==================================================
@@ -42,7 +43,7 @@ Install the package through composer::
         "repositories":[
                 {
                     "type": "vcs",
-                    "url": "gitolite@git.imagin.pl:ceph/php-cephclient"
+                    "url": "https://github.com/octivi/php-cephclient"
                 }],
         "require": {
             "octivi/php-cephclient": "*"
