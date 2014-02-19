@@ -1,7 +1,7 @@
 {
     "name": "php-cephclient",
     "type": "library",
-    "description": "PHP module to communicate with Ceph's REST API ",
+    "description": "PHP module to communicate with Ceph's REST API",
     "keywords": ["php-cephclient", "cephclient", "client", "ceph"],
     "license": "MIT",
     "authors": [
