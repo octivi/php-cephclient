@@ -4,9 +4,11 @@ namespace Octivi\CephClient\Client\Calls;
 
 use Octivi\CephClient\Client\CallsWrapper;
 
-class MonCalls extends CallsWrapper {
+class MonCalls extends CallsWrapper
+{
 
-    public function dump($epoch = null) {
+    public function dump($epoch = null)
+    {
         if ($epoch != null) {
             return $this->getCurl('mon/dump?epoch=' . $epoch);
         } else {
@@ -14,7 +16,8 @@ class MonCalls extends CallsWrapper {
         }
     }
 
-    public function getMap($epoch = null) {
+    public function getMap($epoch = null)
+    {
         if ($epoch != null) {
             return $this->getCurl('mon/getmap?epoch=' . $epoch, 'binary');
         } else {
@@ -22,19 +25,23 @@ class MonCalls extends CallsWrapper {
         }
     }
 
-    public function stat() {
+    public function stat()
+    {
         return $this->getCurl('mon/stat', 'xml');
     }
 
-    public function status() {
+    public function status()
+    {
         return $this->getCurl('mon_status');
     }
 
-    public function add($name, $addr) {
+    public function add($name, $addr)
+    {
         return $this->putCurl('mon/add?name=' . $name . '&addr=' . $addr);
     }
 
-    public function remove($name) {
+    public function remove($name)
+    {
         return $this->putCurl('mon/remove?name=' . $name);
     }
 

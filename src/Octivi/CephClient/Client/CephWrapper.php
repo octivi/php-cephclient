@@ -12,7 +12,8 @@ use Octivi\CephClient\Client\Calls\PgCalls;
 use Octivi\CephClient\Client\Calls\RootCalls;
 use Octivi\CephClient\Client\Calls\TellCalls;
 
-class CephWrapper {
+class CephWrapper
+{
 
     private $client;
     public $auth;
@@ -24,7 +25,8 @@ class CephWrapper {
     public $root;
     public $tell;
 
-    public function __construct($url) {
+    public function __construct($url)
+    {
 
         $this->client = new CephClient($url);
 
@@ -38,7 +40,8 @@ class CephWrapper {
         $this->tell = new TellCalls($this->client);
     }
 
-    public function useAuth($name, $pass) {
+    public function useAuth($name, $pass)
+    {
         if (isset($name) && isset($pass)) {
             $this->client->useAuth(true);
             $this->client->setName($name);
@@ -48,7 +51,8 @@ class CephWrapper {
         }
     }
 
-    public function getInfo() {
+    public function getInfo()
+    {
         return $this->client->getInfo();
     }
 

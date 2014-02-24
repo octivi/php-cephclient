@@ -4,29 +4,36 @@ namespace Octivi\CephClient\Client\Calls;
 
 use Octivi\CephClient\Client\CallsWrapper;
 
-class OsdCalls extends CallsWrapper {
+class OsdCalls extends CallsWrapper
+{
 
-    public function blacklistLs() {
+    public function blacklistLs()
+    {
         return $this->getCurl('osd/blacklist/ls');
     }
 
-    public function crushDump() {
+    public function crushDump()
+    {
         return $this->getCurl('osd/crush/dump');
     }
 
-    public function crushRuleDump() {
+    public function crushRuleDump()
+    {
         return $this->getCurl('osd/crush/rule/dump');
     }
 
-    public function crushRuleList() {
+    public function crushRuleList()
+    {
         return $this->getCurl('osd/crush/rule/list');
     }
 
-    public function crushRuleLs() {
+    public function crushRuleLs()
+    {
         return $this->getCurl('osd/crush/rule/ls');
     }
 
-    public function dump($epoch = null) {
+    public function dump($epoch = null)
+    {
         if ($epoch != null) {
             return $this->getCurl('osd/dump?epoch=' . $epoch);
         } else {
@@ -34,11 +41,13 @@ class OsdCalls extends CallsWrapper {
         }
     }
 
-    public function find($id) {
+    public function find($id)
+    {
         return $this->getCurl('osd/find?id=' . $id);
     }
 
-    public function getCrushMap($epoch = null) {
+    public function getCrushMap($epoch = null)
+    {
         if ($epoch != null) {
             return $this->getCurl('osd/getcrushmap?epoch=' . $epoch, 'binary');
         } else {
@@ -46,7 +55,8 @@ class OsdCalls extends CallsWrapper {
         }
     }
 
-    public function getMap($epoch = null) {
+    public function getMap($epoch = null)
+    {
         if ($epoch != null) {
             return $this->getCurl('osd/getmap?epoch=' . $epoch, 'binary');
         } else {
@@ -54,11 +64,13 @@ class OsdCalls extends CallsWrapper {
         }
     }
 
-    public function getMaxOsd() {
+    public function getMaxOsd()
+    {
         return $this->getCurl('osd/getmaxosd');
     }
 
-    public function ls($epoch = null) {
+    public function ls($epoch = null)
+    {
         if ($epoch != null) {
             return $this->getCurl('osd/ls?epoch=' . $epoch);
         } else {
@@ -66,7 +78,8 @@ class OsdCalls extends CallsWrapper {
         }
     }
 
-    public function lsPools($auid = null) {
+    public function lsPools($auid = null)
+    {
         if ($auid != null) {
             return $this->getCurl('osd/lspools?auid=' . $auid);
         } else {
@@ -74,19 +87,23 @@ class OsdCalls extends CallsWrapper {
         }
     }
 
-    public function map($pool, $object) {
+    public function map($pool, $object)
+    {
         return $this->getCurl('osd/map?pool=' . $pool . '&object=' . $object);
     }
 
-    public function perf() {
+    public function perf()
+    {
         return $this->getCurl('osd/perf');
     }
 
-    public function getPool($pool, $var) {
+    public function getPool($pool, $var)
+    {
         return $this->getCurl('osd/pool/get?pool=' . $pool . '&var=' . $var);
     }
 
-    public function poolStats($name = null) {
+    public function poolStats($name = null)
+    {
         if ($name != null) {
             return $this->getCurl('osd/pool/stats?name=' . $name);
         } else {
@@ -94,11 +111,13 @@ class OsdCalls extends CallsWrapper {
         }
     }
 
-    public function stat() {
+    public function stat()
+    {
         return $this->getCurl('osd/stat');
     }
 
-    public function tree($epoch = null) {
+    public function tree($epoch = null)
+    {
         if ($epoch != null) {
             return $this->getCurl('osd/tree?epoch=' . $epoch);
         } else {

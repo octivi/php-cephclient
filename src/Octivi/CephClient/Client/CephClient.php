@@ -4,44 +4,52 @@ namespace Octivi\CephClient\Client;
 
 use Octivi\CephClient\Exception\CephResponseException;
 
-class CephClient {
+class CephClient
+{
 
     private $useragent = 'nautilus ceph client';
     private $url;
     private $postFields;
     private $info;
     private $authentication = 0;
-    private $auth_name = '';
-    private $auth_pass = '';
+    private $authName = '';
+    private $authPass = '';
 
-    public function __construct($url) {
+    public function __construct($url)
+    {
         $this->url = $url;
     }
 
-    public function useAuth(boolean $use) {
+    public function useAuth(boolean $use)
+    {
         $this->authentication = 0;
-        if ($use == true && !$this->auth_name && !$this->auth_pass) {
+        if ($use == true && !$this->authName && !$this->authPass) {
             $this->authentication = 1;
         }
     }
 
-    public function setName($name) {
-        $this->auth_name = $name;
+    public function setName($name)
+    {
+        $this->authName = $name;
     }
 
-    public function setPass($pass) {
-        $this->auth_pass = $pass;
+    public function setPass($pass)
+    {
+        $this->authPass = $pass;
     }
 
-    public function setPostFields($postFields) {
+    public function setPostFields($postFields)
+    {
         $this->postFields = $postFields;
     }
 
-    public function getInfo() {
+    public function getInfo()
+    {
         return $this->info;
     }
 
-    public function createCurl($url = null, $method = "GET", $body = 'json') {
+    public function createCurl($url = null, $method = "GET", $body = 'json')
+    {
         if ($url != null) {
             $url = $this->url . $url;
         } else {
@@ -83,7 +91,7 @@ class CephClient {
         ));
 
         if ($this->authentication == 1) {
-            curl_setopt($s, CURLOPT_USERPWD, $this->auth_name . ':' . $this->auth_pass);
+            curl_setopt($s, CURLOPT_USERPWD, $this->authName . ':' . $this->authPass);
         }
 
         switch ($method) {
