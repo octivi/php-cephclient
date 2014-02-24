@@ -75,13 +75,25 @@ Do your request.
 
 Response example:
 
+    object(stdClass)[91]
+      public 'status' => string 'OK' (length=2)
+      public 'output' => 
+        object(stdClass)[109]
+          public 'fsid' => string '60d98352-115b-4ca1-a51b-414d98492168' (length=36)
+
+You can set your CephClient to return json respons by setting debug parametr as `true`
+
+    new CephWrapper($url, true);
+
+
+Response example:
+
     {
         "status": "OK",
         "output": {
             "fsid": "d5252e7d-75bc-4083-85ed-fe51fa83f62b"
         }
     }
-
 
 Optional possibility:
 After geting your response you can draw info about the call:

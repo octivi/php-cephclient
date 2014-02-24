@@ -15,20 +15,64 @@ use Octivi\CephClient\Client\Calls\TellCalls;
 class CephWrapper
 {
 
+    /**
+     *
+     * @var CephClient
+     */
     private $client;
+
+    /**
+     *
+     * @var AuthCalls
+     */
     public $auth;
+
+    /**
+     *
+     * @var ConfigKeyCalls
+     */
     public $confKey;
+
+    /**
+     *
+     * @var MdsCalls
+     */
     public $mds;
+
+    /**
+     *
+     * @var MonCalls
+     */
     public $mon;
+
+    /**
+     *
+     * @var OsdCalls
+     */
     public $osd;
+
+    /**
+     *
+     * @var PgCalls
+     */
     public $pg;
+
+    /**
+     *
+     * @var RootCalls
+     */
     public $root;
+
+    /**
+     *
+     * @var TellCalls
+     */
     public $tell;
 
     public function __construct($url, $debug = false)
     {
         $this->client = new CephClient($url);
-        
+
         $this->auth = new AuthCalls($this->client, $debug);
         $this->confKey = new ConfigKeyCalls($this->client, $debug);
         $this->mds = new MdsCalls($this->client, $debug);

@@ -7,6 +7,10 @@ use Octivi\CephClient\Client\CephClient;
 class CallsWrapper
 {
 
+    /**
+     *
+     * @var CephClient
+     */
     protected $client;
     private $debug;
 
