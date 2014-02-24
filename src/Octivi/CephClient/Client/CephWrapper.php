@@ -25,19 +25,18 @@ class CephWrapper
     public $root;
     public $tell;
 
-    public function __construct($url)
+    public function __construct($url, $debug = false)
     {
-
         $this->client = new CephClient($url);
-
-        $this->auth = new AuthCalls($this->client);
-        $this->confKey = new ConfigKeyCalls($this->client);
-        $this->mds = new MdsCalls($this->client);
-        $this->mon = new MonCalls($this->client);
-        $this->osd = new OsdCalls($this->client);
-        $this->pg = new PgCalls($this->client);
-        $this->root = new RootCalls($this->client);
-        $this->tell = new TellCalls($this->client);
+        
+        $this->auth = new AuthCalls($this->client, $debug);
+        $this->confKey = new ConfigKeyCalls($this->client, $debug);
+        $this->mds = new MdsCalls($this->client, $debug);
+        $this->mon = new MonCalls($this->client, $debug);
+        $this->osd = new OsdCalls($this->client, $debug);
+        $this->pg = new PgCalls($this->client, $debug);
+        $this->root = new RootCalls($this->client, $debug);
+        $this->tell = new TellCalls($this->client, $debug);
     }
 
     public function useAuth($name, $pass)
