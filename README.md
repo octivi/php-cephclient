@@ -1,7 +1,7 @@
 Octivi - CephClient
 ======================================
 
-php-cephclient is a PHP module to communicate with [Ceph's REST API](http://ceph.com/docs/master/man/8/ceph-rest-api/).
+php-cephclient is a PHP library to communicate with [Ceph's REST API](http://ceph.com/docs/master/man/8/ceph-rest-api/).
 
 This is currently a work in progress.
 
