@@ -1,89 +1,73 @@
 <?php
+
 /*
-    php-cephcielnt is a PHP library to communicate with Ceph's REST API
-    Copyright (C) 2014  IMAGIN Sp. z o.o.
-    Author: Rafał Lorenz <rlorenz@imagin.pl>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Copyright 2014 IMAGIN Sp. z o.o. - imagin.pl
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace Octivi\CephClient\Client;
 
 use Octivi\CephClient\Client\CephClient;
-use Octivi\CephClient\Client\Calls\AuthCalls;
-use Octivi\CephClient\Client\Calls\ConfigKeyCalls;
-use Octivi\CephClient\Client\Calls\MdsCalls;
-use Octivi\CephClient\Client\Calls\MonCalls;
-use Octivi\CephClient\Client\Calls\OsdCalls;
-use Octivi\CephClient\Client\Calls\PgCalls;
-use Octivi\CephClient\Client\Calls\RootCalls;
-use Octivi\CephClient\Client\Calls\TellCalls;
+use Octivi\CephClient\Client\Commands\AuthCommands;
+use Octivi\CephClient\Client\Commands\ConfigKeyCommands;
+use Octivi\CephClient\Client\Commands\MdsCommands;
+use Octivi\CephClient\Client\Commands\MonCommands;
+use Octivi\CephClient\Client\Commands\OsdCommands;
+use Octivi\CephClient\Client\Commands\PgCommands;
+use Octivi\CephClient\Client\Commands\RootCommands;
+use Octivi\CephClient\Client\Commands\TellCommands;
 
+/**
+ * CephWrapper
+ *
+ * @author Rafał Lorenz <rlorenz@imagin.pl>
+ */
 class CephWrapper
 {
-
     /**
-     *
      * @var CephClient
      */
     private $client;
 
     /**
-     *
-     * @var AuthCalls
+     * @var AuthCommands
      */
     public $auth;
 
     /**
-     *
-     * @var ConfigKeyCalls
+     * @var ConfigKeyCommands
      */
     public $confKey;
 
     /**
-     *
-     * @var MdsCalls
+     * @var MdsCommands
      */
     public $mds;
 
     /**
-     *
-     * @var MonCalls
+     * @var MonCommands
      */
     public $mon;
 
     /**
-     *
-     * @var OsdCalls
+     * @var OsdCommands
      */
     public $osd;
 
     /**
-     *
-     * @var PgCalls
+     * @var PgCommands
      */
     public $pg;
 
     /**
-     *
-     * @var RootCalls
+     * @var RootCommands
      */
     public $root;
 
     /**
-     *
-     * @var TellCalls
+     * @var TellCommands
      */
     public $tell;
 
@@ -91,14 +75,14 @@ class CephWrapper
     {
         $this->client = new CephClient($url);
 
-        $this->auth = new AuthCalls($this->client, $debug);
-        $this->confKey = new ConfigKeyCalls($this->client, $debug);
-        $this->mds = new MdsCalls($this->client, $debug);
-        $this->mon = new MonCalls($this->client, $debug);
-        $this->osd = new OsdCalls($this->client, $debug);
-        $this->pg = new PgCalls($this->client, $debug);
-        $this->root = new RootCalls($this->client, $debug);
-        $this->tell = new TellCalls($this->client, $debug);
+        $this->auth = new AuthCommands($this->client, $debug);
+        $this->confKey = new ConfigKeyCommands($this->client, $debug);
+        $this->mds = new MdsCommands($this->client, $debug);
+        $this->mon = new MonCommands($this->client, $debug);
+        $this->osd = new OsdCommands($this->client, $debug);
+        $this->pg = new PgCommands($this->client, $debug);
+        $this->root = new RootCommands($this->client, $debug);
+        $this->tell = new TellCommands($this->client, $debug);
     }
 
     public function useAuth($name, $pass)
@@ -116,5 +100,4 @@ class CephWrapper
     {
         return $this->client->getInfo();
     }
-
 }
