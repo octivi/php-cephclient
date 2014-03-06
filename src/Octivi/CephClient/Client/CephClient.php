@@ -9,129 +9,95 @@
 
 namespace Octivi\CephClient\Client;
 
-use Octivi\CephClient\Exception\CephResponseException;
+use Octivi\CephClient\Client\CephClient;
+use Octivi\CephClient\Client\Commands\AuthCommands;
+use Octivi\CephClient\Client\Commands\ConfigKeyCommands;
+use Octivi\CephClient\Client\Commands\MdsCommands;
+use Octivi\CephClient\Client\Commands\MonCommands;
+use Octivi\CephClient\Client\Commands\OsdCommands;
+use Octivi\CephClient\Client\Commands\PgCommands;
+use Octivi\CephClient\Client\Commands\RootCommands;
+use Octivi\CephClient\Client\Commands\TellCommands;
 
 /**
- * Main client's class
+ * CephClient
  *
  * @author Rafał Lorenz <rlorenz@imagin.pl>
  */
 class CephClient
 {
-    private $useragent = 'php-cephclient';
-    private $url;
-    private $postFields;
-    private $info;
-    private $authentication = 0;
-    private $authName = '';
-    private $authPass = '';
+    /**
+     * @var CurlClient
+     */
+    private $client;
 
-    public function __construct($url)
+    /**
+     * @var AuthCommands
+     */
+    public $auth;
+
+    /**
+     * @var ConfigKeyCommands
+     */
+    public $confKey;
+
+    /**
+     * @var MdsCommands
+     */
+    public $mds;
+
+    /**
+     * @var MonCommands
+     */
+    public $mon;
+
+    /**
+     * @var OsdCommands
+     */
+    public $osd;
+
+    /**
+     * @var PgCommands
+     */
+    public $pg;
+
+    /**
+     * @var RootCommands
+     */
+    public $root;
+
+    /**
+     * @var TellCommands
+     */
+    public $tell;
+
+    public function __construct($url, $debug = false)
     {
-        $this->url = $url;
+        $this->client = new CurlClient($url);
+
+        $this->auth = new AuthCommands($this->client, $debug);
+        $this->confKey = new ConfigKeyCommands($this->client, $debug);
+        $this->mds = new MdsCommands($this->client, $debug);
+        $this->mon = new MonCommands($this->client, $debug);
+        $this->osd = new OsdCommands($this->client, $debug);
+        $this->pg = new PgCommands($this->client, $debug);
+        $this->root = new RootCommands($this->client, $debug);
+        $this->tell = new TellCommands($this->client, $debug);
     }
 
-    public function useAuth(boolean $use)
+    public function useAuth($name, $pass)
     {
-        $this->authentication = 0;
-        if ($use == true && !$this->authName && !$this->authPass) {
-            $this->authentication = 1;
+        if (isset($name) && isset($pass)) {
+            $this->client->useAuth(true);
+            $this->client->setName($name);
+            $this->client->setPass($pass);
+        } else {
+            $this->client->useAuth(false);
         }
-    }
-
-    public function setName($name)
-    {
-        $this->authName = $name;
-    }
-
-    public function setPass($pass)
-    {
-        $this->authPass = $pass;
-    }
-
-    public function setPostFields($postFields)
-    {
-        $this->postFields = $postFields;
     }
 
     public function getInfo()
     {
-        return $this->info;
-    }
-
-    public function createCurl($url = null, $method = "GET", $body = 'json')
-    {
-        if ($url != null) {
-            $url = $this->url . $url;
-        } else {
-            $url = $this->url . 'health';
-        }
-
-        $s = curl_init();
-
-        switch ($body) {
-            case "json":
-                $body = 'application/json';
-                break;
-            case "xml":
-                $body = 'application/xml';
-                break;
-            case "binary":
-                $body = 'application/octet-stream';
-                curl_setopt($s, CURLOPT_BINARYTRANSFER, true);
-                break;
-            case "text":
-                $body = 'text/plain';
-                break;
-            default:
-                break;
-        }
-
-        curl_setopt_array($s, array(
-            CURLOPT_URL => $url,
-            CURLOPT_HTTPHEADER => array(
-                "Accept: " . $body,
-                "Content-Type: " . $body,
-            ),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_VERBOSE => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_MAXREDIRS => 4,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_USERAGENT => $this->useragent,
-        ));
-
-        if ($this->authentication == 1) {
-            curl_setopt($s, CURLOPT_USERPWD, $this->authName . ':' . $this->authPass);
-        }
-
-        switch ($method) {
-            case "POST":
-                curl_setopt($s, array(
-                    CURLOPT_POST => true,
-                    CURLOPT_POSTFIELDS => $this->postFields
-                ));
-                break;
-            case "PUT":
-                curl_setopt($s, CURLOPT_PUT, true);
-                break;
-            case "DELETE":
-                curl_setopt($s, CURLOPT_CUSTOMREQUEST, "DELETE");
-                break;
-            default:
-                break;
-        }
-
-        $response = curl_exec($s);
-        $this->info = curl_getinfo($s);
-        $error = array('message' => curl_error($s), 'code' => curl_errno($s));
-
-        curl_close($s);
-
-        if (!$error['code']) {
-            return $response;
-        } else {
-            throw CephResponseException($error['message'], $error['code']);
-        }
+        return $this->client->getInfo();
     }
 }

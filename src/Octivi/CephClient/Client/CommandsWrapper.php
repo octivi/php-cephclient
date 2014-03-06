@@ -19,12 +19,12 @@ use Octivi\CephClient\Client\CephClient;
 class CommandsWrapper
 {
     /**
-     * @var CephClient
+     * @var CurlClient
      */
     protected $client;
     private $debug;
 
-    public function __construct(CephClient $client, $debug = false)
+    public function __construct(CurlClient $client, $debug = false)
     {
         $this->client = $client;
         $this->debug = $debug;
