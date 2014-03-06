@@ -9,7 +9,7 @@
 
 namespace Octivi\CephClient\Client;
 
-use Octivi\CephClient\Client\CephClient;
+use Octivi\CephClient\Client\CurlClient;
 
 /**
  * CommandsWrapper
@@ -32,7 +32,7 @@ class CommandsWrapper
 
     protected function getCurl($url, $body = 'json')
     {
-        $answer = $this->client->createCurl($url, "GET", $body);
+        $answer = $this->client->createCurl($url, CurlClient::METHOD_GET, $body);
         if ($body === 'json' && !$this->debug) {
             return $this->decodeAnswer($answer);
         } else {
@@ -42,7 +42,7 @@ class CommandsWrapper
 
     protected function postCurl($url, $body = 'json')
     {
-        $answer = $this->client->createCurl($url, "POST", $body);
+        $answer = $this->client->createCurl($url, CurlClient::METHOD_POST, $body);
         if ($body === 'json' && !$this->debug) {
             return $this->decodeAnswer($answer);
         } else {
@@ -52,7 +52,7 @@ class CommandsWrapper
 
     protected function putCurl($url, $body = 'json')
     {
-        $answer = $this->client->createCurl($url, "PUT", $body);
+        $answer = $this->client->createCurl($url, CurlClient::METHOD_PUT, $body);
         if ($body === 'json' && !$this->debug) {
             return $this->decodeAnswer($answer);
         } else {
@@ -62,7 +62,7 @@ class CommandsWrapper
 
     protected function deleteCurl($url, $body = 'json')
     {
-        $answer = $this->client->createCurl($url, "DELETE", $body);
+        $answer = $this->client->createCurl($url, CurlClient::METHOD_DELETE, $body);
         if ($body === 'json' && !$this->debug) {
             return $this->decodeAnswer($answer);
         } else {

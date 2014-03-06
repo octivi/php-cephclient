@@ -10,6 +10,7 @@
 namespace Octivi\CephClient\Client;
 
 use Octivi\CephClient\Exception\CephResponseException;
+use Octivi\CephClient\Exception\FormatNotSupportedException;
 
 /**
  * CurlClient
@@ -18,20 +19,48 @@ use Octivi\CephClient\Exception\CephResponseException;
  */
 class CurlClient
 {
+    /**
+     * HTTP methods constants 
+     */
+    const METHOD_GET = 'GET';
+    const METHOD_POST = 'POST';
+    const METHOD_PUT = 'PUT';
+    const METHOD_DELETE = 'DELETE';
+
+    /**
+     * Response formats constants 
+     */
+    const FORMAT_JSON = 'json';
+    const FORMAT_XML = 'xml';
+    const FORMAT_BINARY = 'binary';
+    const FORMAT_TEXT = 'text';
+
     protected $useragent = 'php-cephclient';
     protected $url;
     protected $postFields;
     protected $info;
-    protected $authentication = 0;
-    protected $authName = '';
-    protected $authPass = '';
+    protected $authentication = false;
+    protected $authName;
+    protected $authPass;
+
+    /**
+     * The array of request content types based on the specified response format
+     * 
+     * @var String[]
+     */
+    protected static $contentType = array(
+        self::FORMAT_JSON => 'application/json',
+        self::FORMAT_XML => 'application/xml',
+        self::FORMAT_BINARY => 'application/octet-stream',
+        self::FORMAT_TEXT => 'text/plain',
+    );
 
     public function __construct($url)
     {
         $this->url = $url;
     }
 
-    public function useAuth(boolean $use)
+    public function useAuth($use)
     {
         $this->authentication = 0;
         if ($use == true && !$this->authName && !$this->authPass) {
@@ -59,40 +88,14 @@ class CurlClient
         return $this->info;
     }
 
-    public function createCurl($url = null, $method = "GET", $body = 'json')
+    public function createCurl($endpoint, $method = self::METHOD_GET, $format = self::FORMAT_JSON)
     {
-        if ($url != null) {
-            $url = $this->url . $url;
-        } else {
-            $url = $this->url . 'health';
-        }
+        $curl = curl_init();
 
-        $s = curl_init();
+        $this->setContentType($curl, $format);
 
-        switch ($body) {
-            case "json":
-                $body = 'application/json';
-                break;
-            case "xml":
-                $body = 'application/xml';
-                break;
-            case "binary":
-                $body = 'application/octet-stream';
-                curl_setopt($s, CURLOPT_BINARYTRANSFER, true);
-                break;
-            case "text":
-                $body = 'text/plain';
-                break;
-            default:
-                break;
-        }
-
-        curl_setopt_array($s, array(
-            CURLOPT_URL => $url,
-            CURLOPT_HTTPHEADER => array(
-                "Accept: " . $body,
-                "Content-Type: " . $body,
-            ),
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $endpoint,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_VERBOSE => true,
             CURLOPT_TIMEOUT => 30,
@@ -102,36 +105,55 @@ class CurlClient
         ));
 
         if ($this->authentication == 1) {
-            curl_setopt($s, CURLOPT_USERPWD, $this->authName . ':' . $this->authPass);
+            curl_setopt($curl, CURLOPT_USERPWD, $this->authName . ':' . $this->authPass);
         }
 
         switch ($method) {
-            case "POST":
-                curl_setopt($s, array(
+            case self::METHOD_POST:
+                curl_setopt($curl, array(
                     CURLOPT_POST => true,
                     CURLOPT_POSTFIELDS => $this->postFields
                 ));
                 break;
-            case "PUT":
-                curl_setopt($s, CURLOPT_PUT, true);
+            case self::METHOD_PUT:
+                curl_setopt($curl, CURLOPT_PUT, true);
                 break;
-            case "DELETE":
-                curl_setopt($s, CURLOPT_CUSTOMREQUEST, "DELETE");
+            case self::METHOD_DELETE:
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
                 break;
             default:
                 break;
         }
 
-        $response = curl_exec($s);
-        $this->info = curl_getinfo($s);
-        $error = array('message' => curl_error($s), 'code' => curl_errno($s));
+        $response = curl_exec($curl);
+        $this->info = curl_getinfo($curl);
+        $error = array('message' => curl_error($curl), 'code' => curl_errno($curl));
 
-        curl_close($s);
+        curl_close($curl);
 
         if (!$error['code']) {
             return $response;
         } else {
             throw CephResponseException($error['message'], $error['code']);
         }
+    }
+
+    protected function setContentType($curl, $format)
+    {
+        if (!isset(self::$contentType[$format])) {
+            throw new FormatNotSupportedException($format, array_keys(self::$contentType));
+        }
+        
+        $contentType = self::$contentType[$format];
+
+        if (self::FORMAT_BINARY === $format) {
+            curl_setopt($curl, CURLOPT_BINARYTRANSFER, true);
+        }
+
+        curl_setopt_array($curl, array(
+            CURLOPT_HTTPHEADER => array(
+                'Accept: ' . $contentType,
+                'Content-Type: ' . $contentType,
+        )));
     }
 }
