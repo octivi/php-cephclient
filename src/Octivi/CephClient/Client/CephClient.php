@@ -39,6 +39,16 @@ class CephClient
         $this->debug = $debug;
     }
 
+    public function getDebug()
+    {
+        return $this->debug;
+    }
+
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
+    }
+
     public function setAuth($name, $pass)
     {
         if (isset($name) && isset($pass)) {

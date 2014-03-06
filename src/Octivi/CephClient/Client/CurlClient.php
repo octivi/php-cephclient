@@ -58,7 +58,7 @@ class CurlClient
 
     public function __construct($url)
     {
-        $this->url = $url;
+        $this->url = rtrim($url, '/') . '/';
     }
 
     public function useAuth($use)
@@ -96,7 +96,7 @@ class CurlClient
         $this->setContentType($curl, $format);
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $endpoint,
+            CURLOPT_URL => $this->url . '' .$endpoint,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_VERBOSE => true,
             CURLOPT_TIMEOUT => 30,
@@ -135,7 +135,7 @@ class CurlClient
         if (!$error['code']) {
             return $response;
         } else {
-            throw CephResponseException($error['message'], $error['code']);
+            throw new CephResponseException($error['message'], $error['code']);
         }
     }
 
