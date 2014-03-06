@@ -22,7 +22,7 @@ class CommandsWrapper
      * @var CurlClient
      */
     protected $client;
-    private $debug;
+    protected $debug;
 
     public function __construct(CurlClient $client, $debug = false)
     {
@@ -70,7 +70,7 @@ class CommandsWrapper
         }
     }
 
-    private function decodeAnswer($answer)
+    protected function decodeAnswer($answer)
     {
         return json_decode($answer);
     }

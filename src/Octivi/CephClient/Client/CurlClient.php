@@ -18,13 +18,13 @@ use Octivi\CephClient\Exception\CephResponseException;
  */
 class CurlClient
 {
-    private $useragent = 'php-cephclient';
-    private $url;
-    private $postFields;
-    private $info;
-    private $authentication = 0;
-    private $authName = '';
-    private $authPass = '';
+    protected $useragent = 'php-cephclient';
+    protected $url;
+    protected $postFields;
+    protected $info;
+    protected $authentication = 0;
+    protected $authName = '';
+    protected $authPass = '';
 
     public function __construct($url)
     {

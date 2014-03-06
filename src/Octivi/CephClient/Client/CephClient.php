@@ -29,7 +29,7 @@ class CephClient
     /**
      * @var CurlClient
      */
-    private $client;
+    protected $client;
 
     /**
      * @var AuthCommands
