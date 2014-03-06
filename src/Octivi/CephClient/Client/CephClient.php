@@ -23,6 +23,7 @@ use Octivi\CephClient\Client\Commands\TellCommands;
  * CephClient
  *
  * @author Rafał Lorenz <rlorenz@imagin.pl>
+ * @author Antoni Orfin <aorfin@imagin.pl>
  */
 class CephClient
 {

@@ -16,6 +16,7 @@ use Octivi\CephClient\Exception\FormatNotSupportedException;
  * CurlClient
  *
  * @author Rafał Lorenz <rlorenz@imagin.pl>
+ * @author Antoni Orfin <aorfin@imagin.pl>
  */
 class CurlClient
 {

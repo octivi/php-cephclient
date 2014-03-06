@@ -7,6 +7,7 @@ This is currently a work in progress.
 
 ABOUT
 ==================================================
+
 CurlClient
 --------------------------------------------------
 
@@ -26,10 +27,11 @@ Development, Feedback, Bugs
 Contributors:
 
 * [Rafał Lorenz](https://github.com/vardius)
+* [Antoni Orfin](https://github.com/orfin)
 
-Want to contribute ? Feel free to send pull requests !
+Want to contribute ? Feel free to send pull requests!
 
-Have problems, bugs, feature ideas ?
+Have problems, bugs, feature ideas?
 We are using the github [issue tracker](https://github.com/octivi/php-cephclient/issues) to manage them.
 
 HOW TO USE
@@ -66,12 +68,12 @@ Optional with authentication:
     use Octivi\CephClient\Client\CephClient;
 
     $url = 'http://10.20.51.201:5000/api/v0.1/';
-    $cephClient->useAuth('name', 'pass');
     $cephClient = new CephClient($url);
+    $cephClient->useAuth('name', 'password');
 
 Do your request.
 
-    $response = $cephClient->root->fsId();
+    $response = $cephClient->getRoot()->fsId();
 
 Response example:
 
