@@ -9,7 +9,7 @@
 
 namespace Octivi\CephClient\Client;
 
-use Octivi\CephClient\Client\CephClient;
+use Octivi\CephClient\Client\CurlClient;
 use Octivi\CephClient\Client\Commands\AuthCommands;
 use Octivi\CephClient\Client\Commands\ConfigKeyCommands;
 use Octivi\CephClient\Client\Commands\MdsCommands;
@@ -30,62 +30,15 @@ class CephClient
      * @var CurlClient
      */
     protected $client;
-
-    /**
-     * @var AuthCommands
-     */
-    public $auth;
-
-    /**
-     * @var ConfigKeyCommands
-     */
-    public $confKey;
-
-    /**
-     * @var MdsCommands
-     */
-    public $mds;
-
-    /**
-     * @var MonCommands
-     */
-    public $mon;
-
-    /**
-     * @var OsdCommands
-     */
-    public $osd;
-
-    /**
-     * @var PgCommands
-     */
-    public $pg;
-
-    /**
-     * @var RootCommands
-     */
-    public $root;
-
-    /**
-     * @var TellCommands
-     */
-    public $tell;
-
+    protected $debug;
+    
     public function __construct($url, $debug = false)
     {
         $this->client = new CurlClient($url);
-
-        $this->auth = new AuthCommands($this->client, $debug);
-        $this->confKey = new ConfigKeyCommands($this->client, $debug);
-        $this->mds = new MdsCommands($this->client, $debug);
-        $this->mon = new MonCommands($this->client, $debug);
-        $this->osd = new OsdCommands($this->client, $debug);
-        $this->pg = new PgCommands($this->client, $debug);
-        $this->root = new RootCommands($this->client, $debug);
-        $this->tell = new TellCommands($this->client, $debug);
+        $this->debug = $debug;
     }
 
-    public function useAuth($name, $pass)
+    public function setAuth($name, $pass)
     {
         if (isset($name) && isset($pass)) {
             $this->client->useAuth(true);
@@ -96,6 +49,94 @@ class CephClient
         }
     }
 
+    public function getAuth()
+    {
+        static $commands;
+        
+        if (!isset($commands)) {
+            $commands = new AuthCommands($this->client, $this->debug);
+        }
+        
+        return $commands;
+    }
+
+    public function getConfigKey()
+    {
+        static $commands;
+        
+        if (!isset($commands)) {
+            $commands = new ConfigKeyCommands($this->client, $this->debug);
+        }
+        
+        return $commands;
+    }
+
+    public function getMds()
+    {
+        static $commands;
+        
+        if (!isset($commands)) {
+            $commands = new MdsCommands($this->client, $this->debug);
+        }
+        
+        return $commands;
+    }
+
+    public function getMon()
+    {
+        static $commands;
+        
+        if (!isset($commands)) {
+            $commands = new MonCommands($this->client, $this->debug);
+        }
+        
+        return $commands;
+    }
+
+    public function getOsd()
+    {
+        static $commands;
+        
+        if (!isset($commands)) {
+            $commands = new OsdCommands($this->client, $this->debug);
+        }
+        
+        return $commands;
+    }
+
+    public function getPg()
+    {
+        static $commands;
+        
+        if (!isset($commands)) {
+            $commands = new PgCommands($this->client, $this->debug);
+        }
+        
+        return $commands;
+    }
+
+    public function getRoot()
+    {
+        static $commands;
+        
+        if (!isset($commands)) {
+            $commands = new RootCommands($this->client, $this->debug);
+        }
+        
+        return $commands;
+    }
+
+    public function getTell()
+    {
+        static $commands;
+        
+        if (!isset($commands)) {
+            $commands = new TellCommands($this->client, $this->debug);
+        }
+        
+        return $commands;
+    }
+    
     public function getInfo()
     {
         return $this->client->getInfo();
