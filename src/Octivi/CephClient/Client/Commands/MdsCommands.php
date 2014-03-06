@@ -105,7 +105,7 @@ class MdsCommands extends CommandsWrapper
 
     public function setAllowNewSnaps($sure)
     {
-        //mds/set?key=allow_new_snaps&sure= 
+        //mds/set?key=allow_new_snaps&sure=
         throw FunctionNotImplementedException("Function is not implemented yet!");
     }
 
@@ -134,5 +134,4 @@ class MdsCommands extends CommandsWrapper
         //mds/unset?key=allow_new_snaps&sure=
         throw FunctionNotImplementedException("Function is not implemented yet!");
     }
-
 }

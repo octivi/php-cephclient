@@ -136,5 +136,4 @@ class OsdCommands extends CommandsWrapper
             return $this->getCurl('osd/tree');
         }
     }
-
 }

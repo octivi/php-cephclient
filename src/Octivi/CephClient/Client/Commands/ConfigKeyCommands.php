@@ -33,5 +33,4 @@ class ConfigKeyCommands extends CommandsWrapper
     {
         return $this->getCurl('config-key/list');
     }
-
 }

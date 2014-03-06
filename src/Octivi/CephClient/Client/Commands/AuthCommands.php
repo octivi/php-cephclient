@@ -52,6 +52,7 @@ class AuthCommands extends CommandsWrapper
     public function add($entity, $caps = array(), $file = null)
     {
         # XXX-TODO{ Implement file input
+
         return $this->putCurl('auth/add?entity=' . $entity . $this->getFormatted($caps));
     }
 
@@ -68,12 +69,14 @@ class AuthCommands extends CommandsWrapper
     public function getOrCreate($entity, $caps = array(), $file = null)
     {
         # XXX-TODO{ Implement file input
+
         return $this->putCurl('auth/get-or-create?entity=' . $entity . $this->getFormatted($caps));
     }
 
     public function getOrCreate_key($entity, $caps = array())
     {
         # XXX-TODO{ Implement file input
+
         return $this->putCurl('auth/get-or-create-key?entity=' . $entity . $this->getFormatted($caps));
     }
 
@@ -93,7 +96,7 @@ class AuthCommands extends CommandsWrapper
                 $caps_expanded . array_push('&caps=' . $key . '&caps=' . $permissions);
             }
         }
+
         return implode('', $caps_expanded);
     }
-
 }

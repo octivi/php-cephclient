@@ -56,5 +56,4 @@ class MonCommands extends CommandsWrapper
     {
         return $this->putCurl('mon/remove?name=' . $name);
     }
-
 }
