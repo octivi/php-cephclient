@@ -7,17 +7,18 @@ This is currently a work in progress.
 
 ABOUT
 ==================================================
-Client
+
+CurlClient
 --------------------------------------------------
 
-The cephclient class takes care of sending calls to the API through HTTP and
+The CurlClient class takes care of sending calls to the API through HTTP and
 handle the responses. It supports queries for JSON, XML, plain text or binary.
 
-Wrapper
+CephClient
 --------------------------------------------------
 
-The CephWrapper class extends the client and provides helper functions to
-communicate with the API. The CallWrapper class extends the CephWrapper.
+The CephClient class provides helper functions to
+communicate with the API. The CallWrapper uses the CephClient.
 
 Nothing prevents you from calling the client directly.
 
@@ -26,10 +27,11 @@ Development, Feedback, Bugs
 Contributors:
 
 * [Rafał Lorenz](https://github.com/vardius)
+* [Antoni Orfin](https://github.com/orfin)
 
-Want to contribute ? Feel free to send pull requests !
+Want to contribute ? Feel free to send pull requests!
 
-Have problems, bugs, feature ideas ?
+Have problems, bugs, feature ideas?
 We are using the github [issue tracker](https://github.com/octivi/php-cephclient/issues) to manage them.
 
 HOW TO USE
@@ -54,24 +56,24 @@ Install the package through composer::
 
 Usage
 ----------------
-Instanciate CephWrapper::
+Instanciate CephClient:
 
-    use Octivi\CephClient\Client\CephWrapper;
+    use Octivi\CephClient\Client\CephClient;
 
     $url = 'http://10.20.51.201:5000/api/v0.1/';
-    $cephClient = new CephWrapper($url);
+    $cephClient = new CephClient($url);
 
 Optional with authentication:
 
-    use Octivi\CephClient\Client\CephWrapper;
+    use Octivi\CephClient\Client\CephClient;
 
     $url = 'http://10.20.51.201:5000/api/v0.1/';
-    $cephClient->useAuth('name', 'pass');
-    $cephClient = new CephWrapper($url);
+    $cephClient = new CephClient($url);
+    $cephClient->useAuth('name', 'password');
 
 Do your request.
 
-    $response = $cephClient->root->fsId();
+    $response = $cephClient->getRoot()->fsId();
 
 Response example:
 
@@ -83,7 +85,7 @@ Response example:
 
 You can set your CephClient to return json respons by setting debug parametr as `true`
 
-    new CephWrapper($url, true);
+    new CephClient($url, true);
 
 
 Response example:

@@ -1,4 +1,4 @@
-    * Auth Calls
+    * Auth Commands
         ** export
         ** get
         ** getKey
@@ -11,11 +11,11 @@
         ** getOrCreate_key
         ** -import-
         ** getFormatted
-    * Config Key Calls
+    * Config Key Commands
         ** exists
         ** get
         ** showList
-    * MDS Calls
+    * MDS Commands
         ** showCompat
         ** dump
         ** getMap
@@ -37,14 +37,14 @@
         ** stop
         ** tell
         ** -unsetAllowNewSnaps-
-    * MON Calls
+    * MON Commands
         ** dump
         ** getMap
         ** stat
         ** status
         ** add
         ** remove
-    * OSD Calls
+    * OSD Commands
         ** blacklistLs
         ** crushDump
         ** crushRuleDump
@@ -63,7 +63,7 @@
         ** poolStats
         ** stat
         ** tree
-    * PG Calls
+    * PG Commands
         ** debug
         ** dump
         ** dumpJson
@@ -72,7 +72,7 @@
         ** getMap
         ** map
         ** stat
-    * Root Calls
+    * Root Commands
         ** df
         ** fsId
         ** health
@@ -86,7 +86,7 @@
         ** quorum
         ** scrub
         ** tell
-    * Tell Calls
+    * Tell Commands
         ** debugDumpMissing
         ** dumpPgRecoveryStats
         ** listMissing
