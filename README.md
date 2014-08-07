@@ -43,17 +43,7 @@ Installation
 ----------------
 Install the package through composer::
 
-    {
-        "repositories":[
-                {
-                    "type": "vcs",
-                    "url": "https://github.com/octivi/php-cephclient"
-                }],
-        "require": {
-            "octivi/php-cephclient": "*"
-        },    
-        "minimum-stability": "dev"
-    }
+    php composer.phar require octivi/php-cephclient:*
 
 
 Usage
