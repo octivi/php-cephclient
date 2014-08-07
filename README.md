@@ -29,6 +29,8 @@ Contributors:
 * [Rafał Lorenz](https://github.com/vardius)
 * [Antoni Orfin](https://github.com/orfin)
 
+Thanks to [David Moreau Simard](mailto:moi@dmsimard.com), who is an author of [python-cephclient](https://github.com/dmsimard/python-cephclient), which was our inspiration on creating php-cephclient library.
+
 Want to contribute ? Feel free to send pull requests!
 
 Have problems, bugs, feature ideas?
@@ -39,9 +41,20 @@ HOW TO USE
 
 Installation
 ----------------
-Install the package through Composer:
-    
-    php composer.phar require octivi/php-cephclient:*
+Install the package through composer::
+
+    {
+        "repositories":[
+                {
+                    "type": "vcs",
+                    "url": "https://github.com/octivi/php-cephclient"
+                }],
+        "require": {
+            "octivi/php-cephclient": "*"
+        },    
+        "minimum-stability": "dev"
+    }
+
 
 Usage
 ----------------
